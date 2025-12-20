@@ -27,8 +27,8 @@ const navLinks = [
         ))}
       </ul>
 
-      <!-- Logo -->
-      <a href="/" class="flex items-center justify-center">
+      <!-- Logo (hidden when header is transparent, visible when scrolled) -->
+      <a href="/" id="header-logo" class="flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
         <img 
           src="/images/logo.png" 
           alt="Czarkowice" 
@@ -83,14 +83,21 @@ const navLinks = [
 <script>
   // Header scroll effect
   const header = document.getElementById('header');
+  const headerLogo = document.getElementById('header-logo');
   const navLinks = document.querySelectorAll('.nav-link');
   
   function updateHeader() {
     if (window.scrollY > 100) {
       header?.classList.add('bg-forest-900/95', 'backdrop-blur-sm', 'shadow-lg');
       header?.classList.remove('py-2');
+      // Show logo when scrolled
+      headerLogo?.classList.remove('opacity-0', 'pointer-events-none');
+      headerLogo?.classList.add('opacity-100');
     } else {
       header?.classList.remove('bg-forest-900/95', 'backdrop-blur-sm', 'shadow-lg');
+      // Hide logo when at top
+      headerLogo?.classList.add('opacity-0', 'pointer-events-none');
+      headerLogo?.classList.remove('opacity-100');
     }
   }
   
