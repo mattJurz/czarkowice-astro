@@ -1,54 +1,127 @@
 ---
-// Rooms Section Component
+// Rooms Section Component with Gallery Modal
 
-interface Room {
+interface RoomGallery {
   name: string;
-  description: string;
-  features: string[];
-  image: string;
+  slug: string;
   price: string;
+  priceLabel: string;
+  hasOffer?: boolean;
+  mainImage: string;
+  galleryImages: string[];
 }
 
-interface Props {
-  rooms: Room[];
-}
-
-const { rooms } = Astro.props;
+const rooms: RoomGallery[] = [
+  {
+    name: "Rodzinne",
+    slug: "rodzinne",
+    price: "50 zł",
+    priceLabel: "/ osoba",
+    hasOffer: false,
+    mainImage: "/images/place/osrodek-17.jpg",
+    galleryImages: [
+      "/images/place/osrodek-17.jpg",
+      "/images/rooms/rodzinne-3.jpg"
+    ]
+  },
+  {
+    name: "3 osobowe",
+    slug: "3-osobowe",
+    price: "50 zł",
+    priceLabel: "/ osoba",
+    hasOffer: false,
+    mainImage: "/images/rooms/3-osobowe-2.jpg",
+    galleryImages: [
+      "/images/rooms/3-osobowe-2.jpg",
+      "/images/rooms/3-osobowe-1.jpg",
+      "/images/rooms/3-osobowe-3.jpg",
+      "/images/rooms/3-osobowe-4.jpg",
+      "/images/rooms/3-osobowe-5.jpg"
+    ]
+  },
+  {
+    name: "4 osobowe",
+    slug: "4-osobowe",
+    price: "40 zł",
+    priceLabel: "/ osoba",
+    hasOffer: false,
+    mainImage: "/images/rooms/4-osobowe-2.jpg",
+    galleryImages: [
+      "/images/rooms/4-osobowe-2.jpg",
+      "/images/rooms/4-osobowe-1.jpg",
+      "/images/rooms/4-osobowe-3.jpg",
+      "/images/rooms/4-osobowe-4.jpg"
+    ]
+  },
+  {
+    name: "6 osobowe",
+    slug: "6-osobowe",
+    price: "40 zł",
+    priceLabel: "/ osoba",
+    hasOffer: false,
+    mainImage: "/images/rooms/6-osobowe-1.jpg",
+    galleryImages: [
+      "/images/rooms/6-osobowe-1.jpg",
+      "/images/rooms/6-osobowe-2.jpg",
+      "/images/rooms/6-osobowe-3.jpg",
+      "/images/rooms/6-osobowe-4.jpg",
+      "/images/rooms/6-osobowe-1-3.jpg"
+    ]
+  }
+];
 ---
 
 <section id="pokoje" class="py-20 md:py-28 bg-white">
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
       <p class="text-forest-600 text-sm tracking-[0.2em] uppercase mb-3">Noclegi</p>
-      <h2 class="font-serif text-4xl md:text-5xl text-forest-900 mb-4">Nasze Pokoje</h2>
+      <h2 class="font-serif text-4xl md:text-5xl text-forest-900 mb-4">Pokoje</h2>
       <p class="text-forest-700/80 max-w-2xl mx-auto">
         Komfortowe pokoje z własną łazienką, przytulne i czyste. Idealne miejsce na regenerację po całym dniu zwiedzania okolicy.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
       {rooms.map((room) => (
-        <div class="group card-hover bg-warmth-50 rounded-sm overflow-hidden shadow-md">
-          <div class="aspect-[4/3] overflow-hidden">
-            <img 
-              src={room.image} 
-              alt={room.name} 
-              class="w-full h-full object-cover img-zoom"
-            />
-          </div>
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="font-serif text-2xl text-forest-900">{room.name}</h3>
-              <span class="text-forest-600 font-medium text-sm">{room.price}</span>
+        <div 
+          class="group cursor-pointer room-card" 
+          data-room-slug={room.slug}
+          data-gallery-images={JSON.stringify(room.galleryImages)}
+        >
+          <figure class="relative overflow-hidden rounded-sm shadow-lg">
+            <div class="aspect-square overflow-hidden">
+              <img 
+                src={room.mainImage} 
+                alt={room.name} 
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
-            <p class="text-forest-700/80 text-sm mb-4 leading-relaxed">{room.description}</p>
-            <ul class="flex flex-wrap gap-2">
-              {room.features.map((feature) => (
-                <li class="text-xs bg-forest-100 text-forest-700 px-3 py-1 rounded-full">
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            
+            {room.hasOffer && (
+              <span class="absolute top-4 right-0 bg-amber-600 text-white text-xs font-medium px-3 py-1 shadow-md">
+                Oferta Specjalna
+              </span>
+            )}
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span class="inline-flex items-center gap-2 text-white text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Zobacz galerię
+              </span>
+            </div>
+          </figure>
+
+          <div class="mt-4 text-center">
+            <h3 class="font-serif text-xl md:text-2xl text-forest-900 mb-1 group-hover:text-forest-600 transition-colors">
+              {room.name}
+            </h3>
+            <p class="text-forest-700/80 text-sm">
+              od <span class="font-semibold text-forest-800">{room.price}</span>{room.priceLabel}
+            </p>
           </div>
         </div>
       ))}
@@ -56,3 +129,179 @@ const { rooms } = Astro.props;
   </div>
 </section>
 
+<!-- Gallery Modal -->
+<div id="room-gallery-modal" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+  
+  <!-- Modal Content -->
+  <div class="absolute inset-0 flex items-center justify-center p-4 md:p-8">
+    <!-- Close Button -->
+    <button 
+      id="modal-close" 
+      class="absolute top-4 right-4 md:top-6 md:right-6 text-white/80 hover:text-white transition-colors z-10"
+      aria-label="Zamknij galerię"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    
+    <!-- Room Name -->
+    <h3 id="modal-room-name" class="absolute top-4 left-4 md:top-6 md:left-6 font-serif text-2xl text-white"></h3>
+    
+    <!-- Gallery Container -->
+    <div class="relative w-full max-w-5xl mx-auto">
+      <!-- Main Image -->
+      <div class="relative aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-lg shadow-2xl">
+        <img 
+          id="modal-main-image" 
+          src="" 
+          alt="" 
+          class="w-full h-full object-cover"
+        />
+        
+        <!-- Image Counter -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">
+          <span id="current-image-index">1</span> / <span id="total-images">1</span>
+        </div>
+      </div>
+      
+      <!-- Navigation Arrows -->
+      <button 
+        id="prev-image" 
+        class="absolute left-0 md:-left-16 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+        aria-label="Poprzednie zdjęcie"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <button 
+        id="next-image" 
+        class="absolute right-0 md:-right-16 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-colors"
+        aria-label="Następne zdjęcie"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      
+      <!-- Thumbnails -->
+      <div id="modal-thumbnails" class="mt-4 flex justify-center gap-2 overflow-x-auto py-2 px-4">
+        <!-- Thumbnails will be inserted here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('room-gallery-modal');
+    const backdrop = document.getElementById('modal-backdrop');
+    const closeBtn = document.getElementById('modal-close');
+    const mainImage = document.getElementById('modal-main-image') as HTMLImageElement;
+    const roomName = document.getElementById('modal-room-name');
+    const thumbnailsContainer = document.getElementById('modal-thumbnails');
+    const prevBtn = document.getElementById('prev-image');
+    const nextBtn = document.getElementById('next-image');
+    const currentIndexSpan = document.getElementById('current-image-index');
+    const totalImagesSpan = document.getElementById('total-images');
+    
+    let currentImages: string[] = [];
+    let currentIndex = 0;
+    
+    // Open modal on room card click
+    document.querySelectorAll('.room-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const images = JSON.parse(card.getAttribute('data-gallery-images') || '[]');
+        const name = card.querySelector('h3')?.textContent || '';
+        
+        if (images.length === 0) return;
+        
+        currentImages = images;
+        currentIndex = 0;
+        
+        if (roomName) roomName.textContent = name;
+        updateMainImage();
+        renderThumbnails();
+        
+        modal?.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    function updateMainImage() {
+      if (!mainImage || currentImages.length === 0) return;
+      
+      mainImage.src = currentImages[currentIndex];
+      mainImage.alt = `Zdjęcie ${currentIndex + 1}`;
+      
+      if (currentIndexSpan) currentIndexSpan.textContent = String(currentIndex + 1);
+      if (totalImagesSpan) totalImagesSpan.textContent = String(currentImages.length);
+      
+      // Update thumbnail active state
+      thumbnailsContainer?.querySelectorAll('button').forEach((btn, idx) => {
+        if (idx === currentIndex) {
+          btn.classList.add('ring-2', 'ring-white', 'opacity-100');
+          btn.classList.remove('opacity-60');
+        } else {
+          btn.classList.remove('ring-2', 'ring-white', 'opacity-100');
+          btn.classList.add('opacity-60');
+        }
+      });
+    }
+    
+    function renderThumbnails() {
+      if (!thumbnailsContainer) return;
+      
+      thumbnailsContainer.innerHTML = currentImages.map((img, idx) => `
+        <button 
+          class="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded overflow-hidden transition-all ${idx === 0 ? 'ring-2 ring-white opacity-100' : 'opacity-60 hover:opacity-80'}"
+          data-index="${idx}"
+        >
+          <img src="${img}" alt="Miniatura ${idx + 1}" class="w-full h-full object-cover" />
+        </button>
+      `).join('');
+      
+      // Add click handlers to thumbnails
+      thumbnailsContainer.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentIndex = parseInt(btn.getAttribute('data-index') || '0');
+          updateMainImage();
+        });
+      });
+    }
+    
+    function closeModal() {
+      modal?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % currentImages.length;
+      updateMainImage();
+    }
+    
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      updateMainImage();
+    }
+    
+    // Event listeners
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+    nextBtn?.addEventListener('click', nextImage);
+    prevBtn?.addEventListener('click', prevImage);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal?.classList.contains('hidden')) return;
+      
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+  });
+</script>

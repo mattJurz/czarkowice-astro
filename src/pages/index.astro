@@ -14,30 +14,6 @@ import ContactSection from '../components/sections/ContactSection.astro';
 import SocialSection from '../components/sections/SocialSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
 
-const rooms = [
-  {
-    name: "Pokój Rodzinny",
-    description: "Przestronny pokój z łóżkiem piętrowym, idealny dla rodzin z dziećmi. Własna łazienka z prysznicem.",
-    features: ["Łóżko piętrowe", "Własna łazienka", "WiFi", "Widok na ogród"],
-    image: "/images/czarkowice4.jpg",
-    price: "120 zł / noc"
-  },
-  {
-    name: "Pokój Dwuosobowy",
-    description: "Komfortowy pokój dla par lub dwóch osób, z widokiem na malownicze okolice.",
-    features: ["Łóżko podwójne", "Własna łazienka", "WiFi", "Balkon"],
-    image: "/images/czarkowice4.jpg",
-    price: "100 zł / noc"
-  },
-  {
-    name: "Pokój Wieloosobowy",
-    description: "Idealny dla grup przyjaciół lub większych rodzin. Przestronne wnętrze z pełnym wyposażeniem.",
-    features: ["Do 5 osób", "Własna łazienka", "WiFi", "Aneks kuchenny"],
-    image: "/images/czarkowice4.jpg",
-    price: "200 zł / noc"
-  }
-];
-
 const services = [
   {
     name: "Pokoje",
@@ -61,25 +37,25 @@ const services = [
     name: "Kuchnia",
     description: "Kompletnie wyposażone zaplecze kuchenne do własnego użytku. Możliwość przygotowania posiłków z lokalnych produktów.",
     icon: "👨‍🍳",
-    image: "/images/czarkowice2.jpg"
+    image: "/images/place/osrodek-26.jpg"
   },
   {
     name: "Stołówka",
     description: "Przestronna jadalnia dla gości. Na życzenie przygotowujemy domowe posiłki - śniadania, obiady i kolacje.",
     icon: "🍽️",
-    image: "/images/czarkowice2.jpg"
+    image: "/images/place/osrodek-25.jpg"
   },
   {
     name: "Plac Zabaw",
     description: "Bezpieczny plac zabaw dla dzieci z huśtawkami, zjeżdżalnią i domkiem do zabawy. Duży ogród z przestrzenią do biegania.",
     icon: "🎪",
-    image: "/images/czarkowice1.jpg"
+    image: "/images/place/dzieci-1.jpg"
   },
   {
     name: "Ogniska",
     description: "Wydzielone miejsce na ognisko i grilla w otoczeniu natury. Idealne na wieczorne spotkania, śpiewanie i pieczenie kiełbasek.",
     icon: "🔥",
-    image: "/images/czarkowice1.jpg"
+    image: "/images/new/ognisko.jpg"
   }
 ];
 
@@ -111,7 +87,7 @@ const features = [
   <Header />
   <HeroSection />
   <FeaturesSection features={features} />
-  <RoomsSection rooms={rooms} />
+  <RoomsSection />
   <OfertaSection services={services} />
   <GallerySection />
   <WeselaSection />
