@@ -1,0 +1,409 @@
+---
+// Imprezy (Events) Section Component with Gallery Modal
+
+// Event types with their descriptions and icons
+const eventTypes = [
+  {
+    name: "Przyjęcia",
+    description: "Eleganckie przyjęcia rodzinne i towarzyskie w klimatycznej sali z kominkiem.",
+    icon: "🥂",
+    image: "/images/facebook_gallery/33043201_2181984355146804_523983686534692864_n.jpg"
+  },
+  {
+    name: "Ogniska",
+    description: "Wieczorne spotkania przy ognisku z pieczeniem kiełbasek i śpiewem pod gwiazdami.",
+    icon: "🔥",
+    image: "/images/facebook_gallery/33030952_2181984378480135_1888244807902429184_n.jpg"
+  },
+  {
+    name: "Imprezy Okolicznościowe",
+    description: "Komunie, chrzciny, rocznice i inne ważne wydarzenia w wyjątkowej oprawie.",
+    icon: "🎊",
+    image: "/images/facebook_gallery/35142517_2215943228417583_4371253873751359488_n.jpg"
+  },
+  {
+    name: "Integracje Firmowe",
+    description: "Team building i wyjazdy integracyjne dla firm w otoczeniu natury.",
+    icon: "🤝",
+    image: "/images/facebook_gallery/35206665_2215943031750936_6928214227668697088_n.jpg"
+  },
+  {
+    name: "Urodziny i Jubileusze",
+    description: "Niezapomniane świętowanie urodzin i rocznic w gronie najbliższych.",
+    icon: "🎂",
+    image: "/images/facebook_gallery/44834577_2484143891597514_325733751407509504_n.jpg"
+  },
+  {
+    name: "Grillowanie",
+    description: "Spotkania przy grillu z domowym jedzeniem i dobrą zabawą na świeżym powietrzu.",
+    icon: "🍖",
+    image: "/images/facebook_gallery/34882895_2211581202187119_7361268895291801600_n.jpg"
+  }
+];
+
+// All gallery images for the modal
+const imprezaGalleryImages = [
+  "/images/facebook_gallery/33043201_2181984355146804_523983686534692864_n.jpg",
+  "/images/facebook_gallery/33030952_2181984378480135_1888244807902429184_n.jpg",
+  "/images/facebook_gallery/35142517_2215943228417583_4371253873751359488_n.jpg",
+  "/images/facebook_gallery/35206665_2215943031750936_6928214227668697088_n.jpg",
+  "/images/facebook_gallery/44834577_2484143891597514_325733751407509504_n.jpg",
+  "/images/facebook_gallery/34882895_2211581202187119_7361268895291801600_n.jpg",
+  "/images/facebook_gallery/32829091_2181984501813456_8075826834870108160_n.jpg",
+  "/images/facebook_gallery/32929941_2181984668480106_1033439259643609088_n.jpg",
+  "/images/facebook_gallery/32966569_2181984878480085_7888430410948935680_n.jpg",
+  "/images/facebook_gallery/32972197_2181984508480122_3957952701320396800_n.jpg",
+  "/images/facebook_gallery/33029693_2181984745146765_899025423436873728_n.jpg",
+  "/images/facebook_gallery/33119992_2181984818480091_1186037553589911552_n.jpg",
+  "/images/facebook_gallery/33154361_2181984625146777_12394670025867264_n.jpg",
+  "/images/facebook_gallery/33154424_2181984418480131_931810450700500992_n.jpg",
+  "/images/facebook_gallery/33184002_2181984305146809_4851227880807464960_n.jpg",
+  "/images/facebook_gallery/34843989_2211580888853817_1331681844512423936_n.jpg",
+  "/images/facebook_gallery/34874229_2211581325520440_9069081225146138624_n.jpg",
+  "/images/facebook_gallery/34885657_2211581118853794_6361546954282893312_n.jpg",
+  "/images/facebook_gallery/34928714_2211581298853776_3967786385426874368_n.jpg",
+  "/images/facebook_gallery/34962555_2211581108853795_1885977791019614208_n.jpg",
+  "/images/facebook_gallery/35051658_2211580892187150_6327981660310601728_n.jpg",
+  "/images/facebook_gallery/35053803_2211581335520439_6090473598089166848_n.jpg",
+  "/images/facebook_gallery/35071130_2211580885520484_5637102085888540672_n.jpg",
+  "/images/facebook_gallery/35118959_2211581075520465_6998950204435070976_n.jpg",
+  "/images/facebook_gallery/35147480_2215943185084254_2883204111216410624_n.jpg",
+  "/images/facebook_gallery/35162241_2215943085084264_6914364173614841856_n.jpg",
+  "/images/facebook_gallery/35238257_2218618801483359_2824052352737083392_n.jpg",
+  "/images/facebook_gallery/35239715_2215943045084268_4285736303179333632_n.jpg",
+  "/images/facebook_gallery/35240229_2215943118417594_4077689792463110144_n.jpg",
+  "/images/facebook_gallery/35266894_2218618798150026_7538419395555491840_n.jpg",
+  "/images/facebook_gallery/35268117_2215942975084275_3100451279399288832_n.jpg",
+  "/images/facebook_gallery/35288634_2218618924816680_8110923559561330688_n.jpg",
+  "/images/facebook_gallery/36776575_2263409947004244_8812150251365335040_n.jpg",
+  "/images/facebook_gallery/37074047_2278856448792927_5976002630772588544_n.jpg",
+  "/images/facebook_gallery/37079279_2278856335459605_5113240200331395072_n.jpg",
+  "/images/facebook_gallery/37123188_2279212888757283_1478763527844921344_n.jpg",
+  "/images/facebook_gallery/37131087_2278856432126262_6510477565201743872_n.jpg",
+  "/images/facebook_gallery/37214078_2279212922090613_707169805555204096_n.jpg",
+  "/images/facebook_gallery/37613657_2294293520582553_8091400197306843136_n.jpg",
+  "/images/facebook_gallery/44887172_2484862098192360_1714553792126517248_n.jpg",
+  "/images/facebook_gallery/44894288_2484277411584162_7572490116984209408_n.jpg",
+  "/images/facebook_gallery/44909879_2484144178264152_1608669984853065728_n.jpg",
+  "/images/facebook_gallery/44911895_2484862091525694_2644868352962461696_n.jpg",
+  "/images/facebook_gallery/44954241_2484143794930857_6388119238338412544_n.jpg",
+  "/images/facebook_gallery/106095021_4332919126719972_4603872656874136775_n.jpg",
+  "/images/facebook_gallery/117108162_4523146834363866_6790569681647461478_n.jpg",
+  "/images/facebook_gallery/117128460_4523146987697184_4686379081976280452_n.jpg",
+  "/images/facebook_gallery/117179573_4523147134363836_7998865745786750189_n.jpg",
+  "/images/facebook_gallery/160071296_5535102006501672_8363911184740246670_n.jpg",
+  "/images/facebook_gallery/160090426_5535101963168343_2794995524464379979_n.jpg",
+];
+---
+
+<section id="imprezy" class="py-20 md:py-28 bg-gradient-to-br from-forest-900 via-forest-950 to-forest-900 text-white relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-warmth-400 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-80 h-80 bg-forest-400 rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+  </div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16">
+      <p class="text-warmth-400 text-sm tracking-[0.2em] uppercase mb-3">Organizacja Wydarzeń</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-white mb-4">Imprezy i Eventy</h2>
+      <p class="text-white/70 max-w-2xl mx-auto">
+        Organizujemy niezapomniane wydarzenia w sercu natury. Od kameralnych spotkań rodzinnych 
+        po firmowe integracje – zapewniamy idealną przestrzeń i atmosferę.
+      </p>
+    </div>
+
+    <!-- Event Types Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      {eventTypes.map((event, index) => (
+        <div 
+          class="group relative overflow-hidden rounded-lg cursor-pointer impreza-trigger"
+          data-start-index={index}
+        >
+          <!-- Image -->
+          <div class="aspect-[4/3] overflow-hidden">
+            <img 
+              src={event.image} 
+              alt={event.name} 
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+          </div>
+          
+          <!-- Gradient Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          
+          <!-- Content -->
+          <div class="absolute inset-0 p-6 flex flex-col justify-end">
+            <div class="transform transition-transform duration-300 group-hover:-translate-y-2">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="text-3xl drop-shadow-lg">{event.icon}</span>
+                <h3 class="font-serif text-xl md:text-2xl text-white">{event.name}</h3>
+              </div>
+              <p class="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-xs">
+                {event.description}
+              </p>
+            </div>
+            
+            <!-- View Gallery Hint -->
+            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+              <div class="bg-white/20 backdrop-blur-sm rounded-full p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- View Gallery Button -->
+    <div class="text-center">
+      <button 
+        id="impreza-view-all"
+        class="inline-flex items-center gap-3 px-8 py-4 bg-warmth-500/90 hover:bg-warmth-600 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-xl hover:shadow-warmth-500/20 group"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-transform group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Zobacz Galerię Imprez
+        <span class="bg-white/20 px-2 py-0.5 rounded text-sm">{imprezaGalleryImages.length} zdjęć</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Imprezy Gallery Modal -->
+<div id="impreza-modal" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div id="impreza-backdrop" class="absolute inset-0 bg-black/95 backdrop-blur-sm"></div>
+  
+  <!-- Modal Content -->
+  <div class="absolute inset-0 flex flex-col">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 md:p-6">
+      <h3 class="font-serif text-xl md:text-2xl text-white flex items-center gap-3">
+        <span class="text-2xl">🎉</span>
+        Galeria Imprez
+      </h3>
+      <button 
+        id="impreza-close" 
+        class="text-white/80 hover:text-white transition-colors hover:rotate-90 duration-300"
+        aria-label="Zamknij galerię"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Main Image Container -->
+    <div class="flex-1 flex items-center justify-center px-4 md:px-16 relative min-h-0">
+      <!-- Navigation Arrows -->
+      <button 
+        id="impreza-prev" 
+        class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 bg-warmth-500/30 hover:bg-warmth-500/50 text-white p-3 md:p-4 rounded-full transition-all duration-300 z-10 hover:scale-110"
+        aria-label="Poprzednie zdjęcie"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <!-- Main Image -->
+      <div class="max-w-5xl w-full h-full flex items-center justify-center">
+        <img 
+          id="impreza-main-image" 
+          src="" 
+          alt="" 
+          class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300"
+        />
+      </div>
+      
+      <button 
+        id="impreza-next" 
+        class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 bg-warmth-500/30 hover:bg-warmth-500/50 text-white p-3 md:p-4 rounded-full transition-all duration-300 z-10 hover:scale-110"
+        aria-label="Następne zdjęcie"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Footer with Thumbnails -->
+    <div class="p-4 md:p-6">
+      <!-- Image Counter -->
+      <div class="text-center text-white/80 text-sm mb-4">
+        <span id="impreza-current">1</span> / <span id="impreza-total">1</span>
+      </div>
+      
+      <!-- Thumbnails Scroll Container -->
+      <div id="impreza-thumbnails" class="flex gap-2 overflow-x-auto py-2 justify-start md:justify-center impreza-scrollbar">
+        <!-- Thumbnails inserted by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pass gallery data to JS -->
+<script define:vars={{ imprezaGalleryImages }}>
+  window.imprezaGalleryData = imprezaGalleryImages;
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('impreza-modal');
+    const backdrop = document.getElementById('impreza-backdrop');
+    const closeBtn = document.getElementById('impreza-close');
+    const mainImage = document.getElementById('impreza-main-image') as HTMLImageElement;
+    const thumbnailsContainer = document.getElementById('impreza-thumbnails');
+    const prevBtn = document.getElementById('impreza-prev');
+    const nextBtn = document.getElementById('impreza-next');
+    const currentSpan = document.getElementById('impreza-current');
+    const totalSpan = document.getElementById('impreza-total');
+    const viewAllBtn = document.getElementById('impreza-view-all');
+    
+    // @ts-ignore
+    const images: string[] = window.imprezaGalleryData || [];
+    let currentIndex = 0;
+    
+    function openModal(startIndex = 0) {
+      currentIndex = startIndex;
+      updateMainImage();
+      renderThumbnails();
+      modal?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      modal?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    function updateMainImage() {
+      if (!mainImage || images.length === 0) return;
+      
+      // Add fade effect
+      mainImage.style.opacity = '0';
+      setTimeout(() => {
+        mainImage.src = images[currentIndex];
+        mainImage.alt = `Zdjęcie ${currentIndex + 1} z ${images.length}`;
+        mainImage.style.opacity = '1';
+      }, 150);
+      
+      if (currentSpan) currentSpan.textContent = String(currentIndex + 1);
+      if (totalSpan) totalSpan.textContent = String(images.length);
+      
+      // Update thumbnail active state
+      thumbnailsContainer?.querySelectorAll('button').forEach((btn, idx) => {
+        if (idx === currentIndex) {
+          btn.classList.add('ring-2', 'ring-warmth-400', 'opacity-100', 'scale-110');
+          btn.classList.remove('opacity-50', 'scale-100');
+          // Scroll thumbnail into view
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          btn.classList.remove('ring-2', 'ring-warmth-400', 'opacity-100', 'scale-110');
+          btn.classList.add('opacity-50', 'scale-100');
+        }
+      });
+    }
+    
+    function renderThumbnails() {
+      if (!thumbnailsContainer) return;
+      
+      thumbnailsContainer.innerHTML = images.map((img, idx) => `
+        <button 
+          class="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-lg overflow-hidden transition-all duration-300 hover:opacity-80 ${idx === currentIndex ? 'ring-2 ring-warmth-400 opacity-100 scale-110' : 'opacity-50 scale-100'}"
+          data-index="${idx}"
+        >
+          <img src="${img}" alt="Miniatura ${idx + 1}" class="w-full h-full object-cover" loading="lazy" />
+        </button>
+      `).join('');
+      
+      // Add click handlers
+      thumbnailsContainer.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentIndex = parseInt(btn.getAttribute('data-index') || '0');
+          updateMainImage();
+        });
+      });
+    }
+    
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateMainImage();
+    }
+    
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateMainImage();
+    }
+    
+    // Event Listeners
+    document.querySelectorAll('.impreza-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const startIndex = parseInt(trigger.getAttribute('data-start-index') || '0');
+        openModal(startIndex);
+      });
+    });
+    
+    viewAllBtn?.addEventListener('click', () => openModal(0));
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+    nextBtn?.addEventListener('click', nextImage);
+    prevBtn?.addEventListener('click', prevImage);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal?.classList.contains('hidden')) return;
+      
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+    
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modal?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    modal?.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextImage();
+        } else {
+          prevImage();
+        }
+      }
+    }, { passive: true });
+  });
+</script>
+
+<style>
+  .impreza-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .impreza-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  .impreza-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(193, 154, 126, 0.5);
+    border-radius: 3px;
+  }
+  
+  .impreza-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(193, 154, 126, 0.7);
+  }
+</style>
+
