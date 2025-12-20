@@ -1,5 +1,70 @@
 ---
-// Gallery Section Component
+// Gallery Section Component with Modal
+
+// Gallery images organized by category (sourced from Facebook gallery)
+const galleryImages = [
+  // Ośrodek - main venue photos
+  "/images/place/osrodek-1.jpg",
+  "/images/place/osrodek-2.jpg",
+  "/images/place/osrodek-3.jpg",
+  "/images/place/osrodek-4.jpg",
+  "/images/place/osrodek-5.jpg",
+  "/images/place/osrodek-6.jpg",
+  "/images/place/osrodek-7.jpg",
+  "/images/place/osrodek-9.jpg",
+  "/images/place/osrodek-10.jpg",
+  "/images/place/osrodek-12.jpg",
+  "/images/place/osrodek-13.jpg",
+  "/images/place/osrodek-14.jpg",
+  "/images/place/osrodek-15.jpg",
+  "/images/place/osrodek-16.jpg",
+  "/images/place/osrodek-17.jpg",
+  "/images/place/osrodek-18.jpg",
+  "/images/place/osrodek-19.jpg",
+  "/images/place/osrodek-20.jpg",
+  "/images/place/osrodek-21.jpg",
+  "/images/place/osrodek-22.jpg",
+  "/images/place/osrodek-23.jpg",
+  "/images/place/osrodek-24.jpg",
+  "/images/place/osrodek-25.jpg",
+  "/images/place/osrodek-26.jpg",
+  "/images/place/osrodek-27.jpg",
+  "/images/place/osrodek-28.jpg",
+  "/images/place/osrodek-29.jpg",
+  "/images/place/osrodek-30.jpg",
+  // Stołówka
+  "/images/place/stolowka-1.jpg",
+  "/images/place/stolowka-2.jpg",
+  "/images/place/stolowka-3.jpg",
+  "/images/place/stolowka-4.jpg",
+  "/images/place/stolowka-5.jpg",
+  "/images/place/stolowka-6.jpg",
+  "/images/place/stolowka-7.jpg",
+  "/images/place/stolowka-8.jpg",
+  // Sala konferencyjna
+  "/images/place/sala-konferencyjna-1.jpg",
+  "/images/place/sala-konferencyjna-2.jpg",
+  "/images/place/sala-konferencyjna-3.jpg",
+  // Bilard
+  "/images/place/bilard-1.jpg",
+  "/images/place/bilard-2.jpg",
+  "/images/place/bilard-3.jpg",
+  // Other venue photos
+  "/images/place/czarkowice.jpg",
+  "/images/place/czarkowice1.jpg",
+  "/images/place/czarkowice2.jpg",
+  "/images/place/czarkowice3.jpg",
+  "/images/place/czarkowice4.jpg",
+  "/images/place/dzieci-1.jpg",
+];
+
+// Display grid images (subset for the main layout)
+const displayImages = [
+  { src: "/images/place/osrodek-4.jpg", alt: "Ośrodek Czarkowice - widok główny", large: true },
+  { src: "/images/place/sala-konferencyjna-1.jpg", alt: "Sala konferencyjna" },
+  { src: "/images/place/bilard-1.jpg", alt: "Piwnica z bilarem" },
+  { src: "/images/place/stolowka-1.jpg", alt: "Stołówka", wide: true }
+];
 ---
 
 <section id="galeria" class="py-20 md:py-28 bg-white">
@@ -13,35 +78,324 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="col-span-2 row-span-2 group overflow-hidden rounded-sm">
-        <img 
-          src="/images/czarkowice1.jpg" 
-          alt="Czarkowice - budynek główny" 
-          class="w-full h-full object-cover img-zoom cursor-pointer"
-        />
+      <!-- Large image spanning 2 cols and 2 rows -->
+      <div 
+        class="col-span-2 row-span-2 group overflow-hidden rounded-sm cursor-pointer gallery-trigger"
+        data-start-index="0"
+      >
+        <div class="relative w-full h-full">
+          <img 
+            src={displayImages[0].src}
+            alt={displayImages[0].alt}
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Zobacz galerię
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="group overflow-hidden rounded-sm">
-        <img 
-          src="/images/czarkowice2.jpg" 
-          alt="Sala konferencyjna" 
-          class="w-full h-full object-cover img-zoom cursor-pointer"
-        />
+      
+      <!-- Small images -->
+      <div 
+        class="group overflow-hidden rounded-sm cursor-pointer gallery-trigger"
+        data-start-index="36"
+      >
+        <div class="relative w-full h-full aspect-square">
+          <img 
+            src={displayImages[1].src}
+            alt={displayImages[1].alt}
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="group overflow-hidden rounded-sm">
-        <img 
-          src="/images/czarkowice3.jpg" 
-          alt="Piwnica z bilarem" 
-          class="w-full h-full object-cover img-zoom cursor-pointer"
-        />
+      
+      <div 
+        class="group overflow-hidden rounded-sm cursor-pointer gallery-trigger"
+        data-start-index="40"
+      >
+        <div class="relative w-full h-full aspect-square">
+          <img 
+            src={displayImages[2].src}
+            alt={displayImages[2].alt}
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </div>
+        </div>
       </div>
-      <div class="col-span-2 group overflow-hidden rounded-sm">
-        <img 
-          src="/images/czarkowice4.jpg" 
-          alt="Pokój gościnny" 
-          class="w-full h-full object-cover img-zoom cursor-pointer aspect-video"
-        />
+      
+      <!-- Wide image spanning 2 cols -->
+      <div 
+        class="col-span-2 group overflow-hidden rounded-sm cursor-pointer gallery-trigger"
+        data-start-index="28"
+      >
+        <div class="relative w-full h-full">
+          <img 
+            src={displayImages[3].src}
+            alt={displayImages[3].alt}
+            class="w-full h-full object-cover aspect-video transition-transform duration-500 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+            <span class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white flex items-center gap-2 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {galleryImages.length} zdjęć
+            </span>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- View all button -->
+    <div class="text-center mt-8">
+      <button 
+        id="view-all-gallery"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-forest-700 hover:bg-forest-800 text-white rounded-sm transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Zobacz całą galerię
+      </button>
     </div>
   </div>
 </section>
 
+<!-- Gallery Modal -->
+<div id="gallery-modal" class="fixed inset-0 z-50 hidden">
+  <!-- Backdrop -->
+  <div id="gallery-backdrop" class="absolute inset-0 bg-black/95"></div>
+  
+  <!-- Modal Content -->
+  <div class="absolute inset-0 flex flex-col">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 md:p-6">
+      <h3 class="font-serif text-xl md:text-2xl text-white">Galeria Czarkowice</h3>
+      <button 
+        id="gallery-close" 
+        class="text-white/80 hover:text-white transition-colors"
+        aria-label="Zamknij galerię"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Main Image Container -->
+    <div class="flex-1 flex items-center justify-center px-4 md:px-16 relative min-h-0">
+      <!-- Navigation Arrows -->
+      <button 
+        id="gallery-prev" 
+        class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 md:p-4 rounded-full transition-colors z-10"
+        aria-label="Poprzednie zdjęcie"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      <!-- Main Image -->
+      <div class="max-w-5xl w-full h-full flex items-center justify-center">
+        <img 
+          id="gallery-main-image" 
+          src="" 
+          alt="" 
+          class="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+        />
+      </div>
+      
+      <button 
+        id="gallery-next" 
+        class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-3 md:p-4 rounded-full transition-colors z-10"
+        aria-label="Następne zdjęcie"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Footer with Thumbnails -->
+    <div class="p-4 md:p-6">
+      <!-- Image Counter -->
+      <div class="text-center text-white/80 text-sm mb-4">
+        <span id="gallery-current">1</span> / <span id="gallery-total">1</span>
+      </div>
+      
+      <!-- Thumbnails Scroll Container -->
+      <div id="gallery-thumbnails" class="flex gap-2 overflow-x-auto py-2 justify-start md:justify-center scrollbar-thin">
+        <!-- Thumbnails inserted by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pass gallery data to JS -->
+<script define:vars={{ galleryImages }}>
+  window.galleryImagesData = galleryImages;
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('gallery-modal');
+    const backdrop = document.getElementById('gallery-backdrop');
+    const closeBtn = document.getElementById('gallery-close');
+    const mainImage = document.getElementById('gallery-main-image') as HTMLImageElement;
+    const thumbnailsContainer = document.getElementById('gallery-thumbnails');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const currentSpan = document.getElementById('gallery-current');
+    const totalSpan = document.getElementById('gallery-total');
+    const viewAllBtn = document.getElementById('view-all-gallery');
+    
+    // @ts-ignore
+    const images: string[] = window.galleryImagesData || [];
+    let currentIndex = 0;
+    
+    function openModal(startIndex = 0) {
+      currentIndex = startIndex;
+      updateMainImage();
+      renderThumbnails();
+      modal?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      modal?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    function updateMainImage() {
+      if (!mainImage || images.length === 0) return;
+      
+      mainImage.src = images[currentIndex];
+      mainImage.alt = `Zdjęcie ${currentIndex + 1} z ${images.length}`;
+      
+      if (currentSpan) currentSpan.textContent = String(currentIndex + 1);
+      if (totalSpan) totalSpan.textContent = String(images.length);
+      
+      // Update thumbnail active state
+      thumbnailsContainer?.querySelectorAll('button').forEach((btn, idx) => {
+        if (idx === currentIndex) {
+          btn.classList.add('ring-2', 'ring-white', 'opacity-100');
+          btn.classList.remove('opacity-50');
+          // Scroll thumbnail into view
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+          btn.classList.remove('ring-2', 'ring-white', 'opacity-100');
+          btn.classList.add('opacity-50');
+        }
+      });
+    }
+    
+    function renderThumbnails() {
+      if (!thumbnailsContainer) return;
+      
+      thumbnailsContainer.innerHTML = images.map((img, idx) => `
+        <button 
+          class="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded overflow-hidden transition-all hover:opacity-80 ${idx === currentIndex ? 'ring-2 ring-white opacity-100' : 'opacity-50'}"
+          data-index="${idx}"
+        >
+          <img src="${img}" alt="Miniatura ${idx + 1}" class="w-full h-full object-cover" loading="lazy" />
+        </button>
+      `).join('');
+      
+      // Add click handlers
+      thumbnailsContainer.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentIndex = parseInt(btn.getAttribute('data-index') || '0');
+          updateMainImage();
+        });
+      });
+    }
+    
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateMainImage();
+    }
+    
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateMainImage();
+    }
+    
+    // Event Listeners
+    document.querySelectorAll('.gallery-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const startIndex = parseInt(trigger.getAttribute('data-start-index') || '0');
+        openModal(startIndex);
+      });
+    });
+    
+    viewAllBtn?.addEventListener('click', () => openModal(0));
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+    nextBtn?.addEventListener('click', nextImage);
+    prevBtn?.addEventListener('click', prevImage);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (modal?.classList.contains('hidden')) return;
+      
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+    
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modal?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    modal?.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextImage();
+        } else {
+          prevImage();
+        }
+      }
+    }, { passive: true });
+  });
+</script>
+
+<style>
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+</style>
