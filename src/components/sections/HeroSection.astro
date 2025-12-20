@@ -6,13 +6,24 @@
   <!-- Background color -->
   <div class="absolute inset-0 bg-warmth-100"></div>
   
-  <!-- Left Image -->
+  <!-- Left Image Slider -->
   <div class="absolute left-0 top-[13%] bottom-[8%] w-[38%] z-10 opacity-0 animate-fade-in-up animate-delay-100">
-    <div class="relative h-full ml-[8%] shadow-2xl overflow-hidden">
+    <div class="relative h-full ml-[8%] shadow-2xl overflow-hidden" id="left-slider">
       <img 
         src="/images/place/osrodek-25.jpg" 
-        alt="Klimatyczne wnętrze - bilard i wino"
-        class="w-full h-full object-cover"
+        alt="Ośrodek Czarkowice"
+        class="slider-image absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000"
+      />
+      <img 
+      src="/images/place/osrodek-28.jpg" 
+        alt="Klimatyczne wnętrze"
+        class="slider-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+      />
+      
+      <img 
+        src="/images/place/stolowka-1.jpg"
+        alt="Widok na ośrodek"
+        class="slider-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
       />
     </div>
   </div>
@@ -127,3 +138,30 @@
     }
   }
 </style>
+
+<script>
+  // Left image slider - fade between images
+  const sliderImages = document.querySelectorAll('#left-slider .slider-image');
+  let currentIndex = 0;
+  const intervalTime = 3000; // 5 seconds between transitions
+
+  function fadeToNext() {
+    // Fade out current image
+    sliderImages[currentIndex].classList.remove('opacity-100');
+    sliderImages[currentIndex].classList.add('opacity-0');
+    
+    // Move to next image
+    currentIndex = (currentIndex + 1) % sliderImages.length;
+    
+    // Fade in next image
+    sliderImages[currentIndex].classList.remove('opacity-0');
+    sliderImages[currentIndex].classList.add('opacity-100');
+  }
+
+  // Start the slider after initial page load animation
+  if (sliderImages.length > 1) {
+    setTimeout(() => {
+      setInterval(fadeToNext, intervalTime);
+    }, 2000); // Wait 2 seconds before starting to let page load animations finish
+  }
+</script>
