@@ -13,13 +13,13 @@ const navLinks = [
 <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
   <div class="container mx-auto px-6 py-4">
     <nav class="flex items-center justify-between">
-      <!-- Left Nav -->
+      <!-- Left Nav (dark text when transparent, white when scrolled) -->
       <ul class="hidden md:flex items-center gap-8">
         {navLinks.slice(0, 3).map((link) => (
           <li>
             <a 
               href={link.href} 
-              class="nav-link text-sm font-medium tracking-wide uppercase text-white/90 hover:text-white transition-colors duration-300"
+              class="nav-link-left text-sm font-medium tracking-wide uppercase text-forest-700 hover:text-forest-900 transition-colors duration-300"
             >
               {link.label}
             </a>
@@ -53,7 +53,7 @@ const navLinks = [
       <!-- Mobile Menu Button -->
       <button 
         id="mobile-menu-btn" 
-        class="md:hidden text-white p-2"
+        class="md:hidden text-forest-700 p-2 transition-colors duration-300"
         aria-label="Menu"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -84,7 +84,8 @@ const navLinks = [
   // Header scroll effect
   const header = document.getElementById('header');
   const headerLogo = document.getElementById('header-logo');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const leftNavLinks = document.querySelectorAll('.nav-link-left');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   
   function updateHeader() {
     if (window.scrollY > 100) {
@@ -93,11 +94,27 @@ const navLinks = [
       // Show logo when scrolled
       headerLogo?.classList.remove('opacity-0', 'pointer-events-none');
       headerLogo?.classList.add('opacity-100');
+      // Change left nav links to white when scrolled
+      leftNavLinks.forEach(link => {
+        link.classList.remove('text-forest-700', 'hover:text-forest-900');
+        link.classList.add('text-white/90', 'hover:text-white');
+      });
+      // Change mobile menu button to white
+      mobileMenuBtn?.classList.remove('text-forest-700');
+      mobileMenuBtn?.classList.add('text-white');
     } else {
       header?.classList.remove('bg-forest-900/95', 'backdrop-blur-sm', 'shadow-lg');
       // Hide logo when at top
       headerLogo?.classList.add('opacity-0', 'pointer-events-none');
       headerLogo?.classList.remove('opacity-100');
+      // Change left nav links to dark when at top
+      leftNavLinks.forEach(link => {
+        link.classList.add('text-forest-700', 'hover:text-forest-900');
+        link.classList.remove('text-white/90', 'hover:text-white');
+      });
+      // Change mobile menu button to dark
+      mobileMenuBtn?.classList.add('text-forest-700');
+      mobileMenuBtn?.classList.remove('text-white');
     }
   }
   
@@ -105,7 +122,6 @@ const navLinks = [
   updateHeader();
 
   // Mobile menu toggle
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   
   mobileMenuBtn?.addEventListener('click', () => {
