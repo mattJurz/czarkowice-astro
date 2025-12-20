@@ -1,0 +1,67 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { href: "#pokoje", label: "Pokoje" },
+  { href: "#atrakcje", label: "Atrakcje" },
+  { href: "#galeria", label: "Galeria" },
+  { href: "#kontakt", label: "Kontakt" },
+];
+---
+
+<footer class="bg-forest-950 text-white/80">
+  <div class="container mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-3 gap-12 items-start">
+      <!-- Left Links -->
+      <ul class="flex flex-col gap-3 text-center md:text-left">
+        {navLinks.slice(0, 2).map((link) => (
+          <li>
+            <a 
+              href={link.href} 
+              class="text-sm font-medium tracking-wide uppercase hover:text-white transition-colors"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Center Logo & Info -->
+      <div class="flex flex-col items-center text-center">
+        <img 
+          src="/images/logo.png" 
+          alt="Czarkowice" 
+          class="h-20 w-auto mb-6 opacity-90"
+        />
+        <p class="text-sm text-white/60 max-w-xs">
+          Agroturystyka w sercu natury. Idealne miejsce na wypoczynek dla całej rodziny.
+        </p>
+      </div>
+
+      <!-- Right Links -->
+      <ul class="flex flex-col gap-3 text-center md:text-right">
+        {navLinks.slice(2).map((link) => (
+          <li>
+            <a 
+              href={link.href} 
+              class="text-sm font-medium tracking-wide uppercase hover:text-white transition-colors"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <hr class="border-white/10 my-10" />
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50">
+      <p>© {currentYear} Agroturystyka Czarkowice. Wszelkie prawa zastrzeżone.</p>
+      <div class="flex items-center gap-6">
+        <a href="#" class="hover:text-white transition-colors">Facebook</a>
+        <a href="#" class="hover:text-white transition-colors">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+

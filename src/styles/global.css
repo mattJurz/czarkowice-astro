@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', system-ui, sans-serif;
+  
+  --color-forest-50: #f6f7f4;
+  --color-forest-100: #e8ebe3;
+  --color-forest-200: #d1d7c7;
+  --color-forest-300: #b3bda3;
+  --color-forest-400: #93a17d;
+  --color-forest-500: #768660;
+  --color-forest-600: #5c6a4b;
+  --color-forest-700: #49543d;
+  --color-forest-800: #3c4534;
+  --color-forest-900: #343b2e;
+  --color-forest-950: #1a1f16;
+
+  --color-warmth-50: #fdfcfb;
+  --color-warmth-100: #f9f5f2;
+  --color-warmth-200: #f2e8e0;
+  --color-warmth-300: #e6d5c7;
+  --color-warmth-400: #d4b8a3;
+  --color-warmth-500: #c19a7e;
+  --color-warmth-600: #ab7d62;
+  --color-warmth-700: #8f6550;
+  --color-warmth-800: #755444;
+  --color-warmth-900: #614739;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Hero gradient overlay */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 31, 22, 0.4) 0%,
+    rgba(26, 31, 22, 0.2) 40%,
+    rgba(26, 31, 22, 0.5) 100%
+  );
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Image zoom on hover */
+.img-zoom {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .img-zoom {
+  transform: scale(1.08);
+}
