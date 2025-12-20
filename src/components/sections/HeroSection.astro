@@ -1,167 +1,81 @@
 ---
-// Hero Section Component - MabelGreen style split layout
+// Hero Section Component - Elegant full-width design
 ---
 
-<section class="hero-split relative min-h-screen overflow-hidden">
-  <!-- Background color -->
-  <div class="absolute inset-0 bg-warmth-100"></div>
-  
-  <!-- Left Image Slider -->
-  <div class="absolute left-0 top-[13%] bottom-[8%] w-[38%] z-10 opacity-0 animate-fade-in-up animate-delay-100">
-    <div class="relative h-full ml-[8%] shadow-2xl overflow-hidden" id="left-slider">
-      <img 
-        src="/images/place/osrodek-25.jpg" 
-        alt="Ośrodek Czarkowice"
-        class="slider-image absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000"
-      />
-      <img 
-      src="/images/place/osrodek-28.jpg" 
-        alt="Klimatyczne wnętrze"
-        class="slider-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
-      />
-      
-      <img 
-        src="/images/place/stolowka-1.jpg"
-        alt="Widok na ośrodek"
-        class="slider-image absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
-      />
-    </div>
-  </div>
-
-  <!-- Right Image -->
-  <div class="absolute right-0 top-0 bottom-0 w-[55%] z-0 opacity-0 animate-fade-in-up animate-delay-200">
+<section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background Image with Overlay -->
+  <div class="absolute inset-0">
     <img 
       src="/images/czarkowice1.jpg" 
-      alt="Agroturystyka Czarkowice - widok na ośrodek"
+      alt="Agroturystyka Czarkowice"
       class="w-full h-full object-cover"
     />
+    <div class="absolute inset-0 bg-gradient-to-b from-forest-950/60 via-forest-950/40 to-forest-950/70"></div>
   </div>
 
-  <!-- Center Arch Overlay -->
-  <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-    <div class="hero-arch bg-white pointer-events-auto opacity-0 animate-fade-in-up animate-delay-300">
-      <div class="arch-content text-center px-8 py-12 md:px-12 md:py-16">
-        <!-- Logo -->
-        <div class="mb-6 opacity-0 animate-fade-in-up animate-delay-400">
-          <img 
-            src="/images/logo.png" 
-            alt="Czarkowice Logo" 
-            class="h-16 md:h-20 mx-auto logo-dark"
-          />
-        </div>
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    <!-- Logo -->
+    <div class="mb-8 opacity-0 animate-fade-in-up animate-delay-100">
+      <img 
+        src="/images/logo.png" 
+        alt="Czarkowice Młyn" 
+        class="h-20 md:h-28 lg:h-32 mx-auto drop-shadow-2xl"
+      />
+    </div>
 
-        <!-- Main Heading -->
-        <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl text-forest-900 mb-6 leading-tight opacity-0 animate-fade-in-up animate-delay-400">
-          <span class="block">ODPOCZYWAJ.</span>
-          <span class="block">SMAKUJ.</span>
-          <span class="block">CIESZ SIĘ.</span>
-        </h1>
+    <!-- Decorative Line -->
+    <div class="w-16 h-px bg-white/40 mx-auto mb-8 opacity-0 animate-fade-in-up animate-delay-200"></div>
 
-        <!-- Description -->
-        <p class="text-warmth-600 text-base md:text-lg max-w-xs mx-auto mb-8 font-light leading-relaxed opacity-0 animate-fade-in-up animate-delay-500">
-          Komfortowy wypoczynek w sercu polskiej wsi – idealne miejsce dla par i rodzin.
-        </p>
+    <!-- Main Heading -->
+    <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight opacity-0 animate-fade-in-up animate-delay-200">
+      <span class="inline-block">Odpoczywaj.</span>
+      <span class="inline-block mx-2 text-warmth-300">Smakuj.</span>
+      <span class="inline-block">Ciesz się.</span>
+    </h1>
 
-        <!-- CTA Button -->
-        <div class="opacity-0 animate-fade-in-up animate-delay-500">
-          <a 
-            href="#kontakt" 
-            class="inline-block px-10 py-4 border-2 border-warmth-500 text-warmth-600 font-medium text-sm tracking-widest uppercase hover:bg-warmth-500 hover:text-white transition-all duration-300"
-          >
-            Zarezerwuj
-          </a>
-        </div>
-      </div>
+    <!-- Description -->
+    <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 font-light leading-relaxed opacity-0 animate-fade-in-up animate-delay-300">
+      Komfortowy wypoczynek w sercu polskiej wsi – idealne miejsce dla par, rodzin i grup.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up animate-delay-400">
+      <a 
+        href="#pokoje" 
+        class="px-8 py-4 bg-warmth-500 text-white font-medium text-sm tracking-widest uppercase hover:bg-warmth-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+      >
+        Zobacz Pokoje
+      </a>
+      <a 
+        href="#kontakt" 
+        class="px-8 py-4 border-2 border-white/50 text-white font-medium text-sm tracking-widest uppercase hover:bg-white/10 hover:border-white transition-all duration-300"
+      >
+        Zarezerwuj
+      </a>
     </div>
   </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in-up animate-delay-500">
+    <div class="flex flex-col items-center text-white/60">
+      <span class="text-xs tracking-widest uppercase mb-2">Odkryj więcej</span>
+      <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Decorative Corner Elements -->
+  <div class="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-white/20 opacity-0 animate-fade-in-up animate-delay-500"></div>
+  <div class="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-white/20 opacity-0 animate-fade-in-up animate-delay-500"></div>
+  <div class="absolute bottom-8 left-8 w-16 h-16 border-l-2 border-b-2 border-white/20 opacity-0 animate-fade-in-up animate-delay-500"></div>
+  <div class="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-white/20 opacity-0 animate-fade-in-up animate-delay-500"></div>
 </section>
 
 <style>
-  .hero-split {
+  .hero {
     min-height: 100vh;
     min-height: 100dvh;
   }
-
-  .hero-arch {
-    width: 340px;
-    padding-bottom: 40px;
-    border-radius: 170px 170px 0 0;
-    box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.15);
-  }
-
-  .arch-content {
-    padding-top: 3rem;
-  }
-
-  .logo-dark {
-    filter: invert(50%) sepia(10%) saturate(600%) hue-rotate(70deg) brightness(95%) contrast(90%);
-  }
-
-  @media (min-width: 768px) {
-    .hero-arch {
-      width: 420px;
-      border-radius: 210px 210px 0 0;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .hero-arch {
-      width: 480px;
-      border-radius: 240px 240px 0 0;
-    }
-
-    .arch-content {
-      padding-top: 4rem;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .hero-split .absolute.left-0 {
-      display: none;
-    }
-
-    .hero-split .absolute.right-0 {
-      width: 100%;
-      left: 0;
-    }
-
-    .hero-split .absolute.right-0::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    .hero-arch {
-      width: 90%;
-      max-width: 340px;
-    }
-  }
 </style>
-
-<script>
-  // Left image slider - fade between images
-  const sliderImages = document.querySelectorAll('#left-slider .slider-image');
-  let currentIndex = 0;
-  const intervalTime = 3000; // 5 seconds between transitions
-
-  function fadeToNext() {
-    // Fade out current image
-    sliderImages[currentIndex].classList.remove('opacity-100');
-    sliderImages[currentIndex].classList.add('opacity-0');
-    
-    // Move to next image
-    currentIndex = (currentIndex + 1) % sliderImages.length;
-    
-    // Fade in next image
-    sliderImages[currentIndex].classList.remove('opacity-0');
-    sliderImages[currentIndex].classList.add('opacity-100');
-  }
-
-  // Start the slider after initial page load animation
-  if (sliderImages.length > 1) {
-    setTimeout(() => {
-      setInterval(fadeToNext, intervalTime);
-    }, 2000); // Wait 2 seconds before starting to let page load animations finish
-  }
-</script>
