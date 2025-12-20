@@ -1,0 +1,35 @@
+---
+// Features Section Component
+
+interface Feature {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  features: Feature[];
+}
+
+const { features } = Astro.props;
+---
+
+<section class="py-20 md:py-28 bg-warmth-100">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-forest-600 text-sm tracking-[0.2em] uppercase mb-3">Dlaczego My</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-forest-900">Idealne Miejsce na Wypoczynek</h2>
+    </div>
+    
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {features.map((feature) => (
+        <div class="text-center p-6">
+          <div class="text-4xl mb-4">{feature.icon}</div>
+          <h3 class="font-serif text-xl text-forest-900 mb-3">{feature.title}</h3>
+          <p class="text-forest-700/80 text-sm leading-relaxed">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+

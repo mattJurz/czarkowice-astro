@@ -1,0 +1,58 @@
+---
+// Rooms Section Component
+
+interface Room {
+  name: string;
+  description: string;
+  features: string[];
+  image: string;
+  price: string;
+}
+
+interface Props {
+  rooms: Room[];
+}
+
+const { rooms } = Astro.props;
+---
+
+<section id="pokoje" class="py-20 md:py-28 bg-white">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-forest-600 text-sm tracking-[0.2em] uppercase mb-3">Noclegi</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-forest-900 mb-4">Nasze Pokoje</h2>
+      <p class="text-forest-700/80 max-w-2xl mx-auto">
+        Komfortowe pokoje z własną łazienką, przytulne i czyste. Idealne miejsce na regenerację po całym dniu zwiedzania okolicy.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {rooms.map((room) => (
+        <div class="group card-hover bg-warmth-50 rounded-sm overflow-hidden shadow-md">
+          <div class="aspect-[4/3] overflow-hidden">
+            <img 
+              src={room.image} 
+              alt={room.name} 
+              class="w-full h-full object-cover img-zoom"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-serif text-2xl text-forest-900">{room.name}</h3>
+              <span class="text-forest-600 font-medium text-sm">{room.price}</span>
+            </div>
+            <p class="text-forest-700/80 text-sm mb-4 leading-relaxed">{room.description}</p>
+            <ul class="flex flex-wrap gap-2">
+              {room.features.map((feature) => (
+                <li class="text-xs bg-forest-100 text-forest-700 px-3 py-1 rounded-full">
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
