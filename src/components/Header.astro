@@ -2,6 +2,7 @@
 const navLinks = [
   { href: "#pokoje", label: "Pokoje" },
   { href: "#oferta", label: "Oferta" },
+  { href: "#wesela", label: "Wesela" },
   { href: "#galeria", label: "Galeria" },
   { href: "#kontakt", label: "Kontakt" },
 ];
@@ -12,7 +13,7 @@ const navLinks = [
     <nav class="flex items-center justify-between">
       <!-- Left Nav -->
       <ul class="hidden md:flex items-center gap-8">
-        {navLinks.slice(0, 2).map((link) => (
+        {navLinks.slice(0, 3).map((link) => (
           <li>
             <a 
               href={link.href} 
@@ -35,7 +36,7 @@ const navLinks = [
 
       <!-- Right Nav -->
       <ul class="hidden md:flex items-center gap-8">
-        {navLinks.slice(2).map((link) => (
+        {navLinks.slice(3).map((link) => (
           <li>
             <a 
               href={link.href} 
