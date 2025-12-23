@@ -4,22 +4,121 @@ import '../styles/global.css'
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  keywords?: string;
 }
 
-const { title, description = "Agroturystyka Czarkowice - wypoczynek na łonie natury w malowniczej okolicy. Pokoje gościnne, sala konferencyjna, atrakcje dla całej rodziny." } = Astro.props;
+const siteUrl = "https://www.czarkowice.pl";
+const defaultDescription = "Agroturystyka Czarkowice Młyn - komfortowy wypoczynek w sercu natury. Pokoje gościnne, sala konferencyjna na 50 osób, plac zabaw, stadnina koni. Idealne miejsce dla rodzin i grup w województwie opolskim.";
+const defaultKeywords = "agroturystyka, czarkowice, noclegi, pokoje gościnne, wypoczynek, wieś, natura, opolskie, nysa, kępnica, sala konferencyjna, imprezy okolicznościowe, rodzinny wypoczynek, stadnina koni, weekend, wakacje";
+
+const { 
+  title, 
+  description = defaultDescription,
+  image = "/images/czarkowice1.jpg",
+  keywords = defaultKeywords
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImage = new URL(image, siteUrl).href;
+
+// Structured Data - LocalBusiness (JSON-LD)
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Agroturystyka Czarkowice Młyn",
+  "description": defaultDescription,
+  "url": siteUrl,
+  "logo": `${siteUrl}/images/logo.png`,
+  "image": ogImage,
+  "telephone": "+48774357014",
+  "email": "kontakt@czarkowice.pl",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Czarkowice-Młyn",
+    "addressLocality": "Kępnica",
+    "postalCode": "48-303",
+    "addressRegion": "opolskie",
+    "addressCountry": "PL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 50.4123033,
+    "longitude": 17.3741193
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "08:00",
+    "closes": "20:00"
+  },
+  "priceRange": "$$",
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Sala konferencyjna", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Plac zabaw", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Parking", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "WiFi", "value": true }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/czarkowice"
+  ]
+};
 ---
 
 <!doctype html>
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Agroturystyka Czarkowice Młyn" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Polish" />
+    <meta name="geo.region" content="PL-OP" />
+    <meta name="geo.placename" content="Kępnica" />
+    <meta name="geo.position" content="50.4123033;17.3741193" />
+    <meta name="ICBM" content="50.4123033, 17.3741193" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="Agroturystyka Czarkowice Młyn" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    
+    <!-- Theme & Icons -->
+    <meta name="theme-color" content="#1a3c34" />
+    <meta name="msapplication-TileColor" content="#1a3c34" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="bg-stone-50 text-stone-800 font-sans antialiased">
     <slot />

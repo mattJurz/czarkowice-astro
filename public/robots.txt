@@ -1,0 +1,12 @@
+# Robots.txt for Agroturystyka Czarkowice Młyn
+# https://www.czarkowice.pl
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.czarkowice.pl/sitemap-index.xml
+
+# Crawl delay (optional, be gentle with server)
+Crawl-delay: 1
+
